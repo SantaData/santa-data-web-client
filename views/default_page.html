@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-br">
+
+{% include "./components/head.html" %}
+
+<body class="sidebar-fixed header-fixed">
+    <div class="page-wrapper">
+    {% include "./components/navbar.html" %}
+        <div class="main-container">
+        {% include "./components/sidebar.html" %}
+
+        {% block content %}
+        {% endblock %}
+        </div>
+    </div>
+</body>
+<script src="/static/adm/vendor/jquery/jquery.min.js"></script>
+<script src="/static/adm/vendor/popper.js/popper.min.js"  ></script>
+<script src="/static/adm/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/adm/vendor/chart.js/chart.min.js" ></script>
+<script src="/static/js/carbon.js" ></script>
+<script src="/static/js/demo.js" ></script>
+{% block footer %}
+{% endblock %}
+
+</html>
