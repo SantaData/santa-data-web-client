@@ -8,7 +8,6 @@ const nunjucks = require('nunjucks');
 const session = require('express-session');
 
 const router = require('./routes');
-const db = require('./db');
 
 const env = process.env.NODE_ENV;
 global.__basedir = __dirname;
