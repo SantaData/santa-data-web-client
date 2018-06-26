@@ -3,6 +3,7 @@
 */
 
 const bCrypt = require('bcryptjs');
+var request = require('request');
 // var Util = require('./utils')
 
 // Generates hash using bCrypt
@@ -76,6 +77,7 @@ exports.login = (req, res) => {
     if (req.session.user) res.send('Success!');
     else{
         let { password, email } = req.body;
+
         //ACESSA ROUTER E VERIFICA O LOGIN
         //db.query('SELECT * FROM users WHERE email=$1', [email]).then(result => {
             if (result.rowCount) {
