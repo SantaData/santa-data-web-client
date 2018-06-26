@@ -3,8 +3,13 @@
 */
 
 const bCrypt = require('bcryptjs');
-var request = require('request');
-// var Util = require('./utils')
+const request = require('request');
+const config = require('../constants/config')
+const globalf = require('../controller/utils/global')
+
+
+var conf = config.env === 'dev'? config.dev : config.env === 'local'? config.local : config.prod;
+
 
 // Generates hash using bCrypt
 const createHash = (password) => {
@@ -72,27 +77,36 @@ exports.isLoggedIn = (req, res, next) =>{
         }
 };
 
+//ROTAS
 
 exports.login = (req, res) => {
     if (req.session.user) res.send('Success!');
     else{
-        let { password, email } = req.body;
+        let data = {}
+        data.password = req.body.password;
+        data.email = req.body.email;
 
-        //ACESSA ROUTER E VERIFICA O LOGIN
-        //db.query('SELECT * FROM users WHERE email=$1', [email]).then(result => {
-            if (result.rowCount) {
-                let user = result.rows[0];
-                if(isValidPassword(user, password)){
-                    // CREATE SESSION
-                    delete user.password;
-                    req.session.user = user;
-                    res.send('Success!')
-                }
-                else{
-                    res.status(400).send('Invalid password.')
-                }
+        request({
+            url: conf.server,
+            method: "POST",
+            json: true,   // <--Very important!!!
+            rejectUnauthorized: false,
+            requestCert: true,
+            agent: false,
+            body: {
+                data: globalf.encode_data(data)
             }
-            else res.status(404).send('User not found.')
-        //})
+        }, (error, response, body) => {
+            if(!error){
+                if(body.data.success){
+                    req.session.user = body.data;
+                    res.send({success:true})
+                }
+                else 
+                    res.send({success:false, message: "Login and password invalid"}) 
+            }
+            else
+                res.send({success:false, message: "Internal route error"})
+        });
     }
 };

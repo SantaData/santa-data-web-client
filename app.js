@@ -7,6 +7,7 @@ const morgan = require("morgan");
 const nunjucks = require('nunjucks');
 const session = require('express-session');
 
+const globalf = require('./controller/utils/global')
 const router = require('./router');
 
 const env = process.env.NODE_ENV;
