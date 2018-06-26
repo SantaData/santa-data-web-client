@@ -6,12 +6,12 @@ const bCrypt = require('bcryptjs');
 // var Util = require('./utils')
 
 // Generates hash using bCrypt
-const createHash = function (password) {
+const createHash = (password) => {
     return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null)
 };
 
 
-const isValidPassword = function (user, password) {
+const isValidPassword = (user, password) => {
     return bCrypt.compareSync(password, user.password)
 };
 
@@ -20,6 +20,20 @@ const validaData = (data) => {
     return !(!name || !password || !email);
 };
 
+exports.logout = (req, res, next) => {
+    delete req.session.user;
+    db.query('DELETE FROM user_session_data WHERE sid=$1', [req.session.id]).then(result => {
+        res.clearCookie('Stonehenge', {
+            path: '/',
+            secure: false,
+            httpOnly: true,
+        });
+        res.redirect('/login')
+    }).catch(e => {
+        console.error(e);
+        res.status(500).send('Not ok')
+    })
+};
 
 var checkPermission = (req, res, next, level) =>{ 
     if (process.env.NODE_ENV == 'dev') next() 

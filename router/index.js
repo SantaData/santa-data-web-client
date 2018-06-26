@@ -6,10 +6,7 @@ const user = require('./user.js')
 router.get("/", user.isLoggedIn);
 
 //Login
-router.use("/user",userRouter);
-
-//Home
-
+router.post("/login",user.login);
 
 
 

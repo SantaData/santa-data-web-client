@@ -1,4 +1,8 @@
-import axios from 'axios';
+/*
+* Lib post
+*/
+
+const axios = require('axios')
 import Config from './../config.json';
 import Base64 from './base64';
 
