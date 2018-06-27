@@ -3,12 +3,7 @@
 */
 
 const bCrypt = require('bcryptjs');
-const request = require('request');
-const config = require('../constants/config')
-const globalf = require('../controller/utils/global')
-
-
-var conf = config.env === 'dev'? config.dev : config.env === 'local'? config.local : config.prod;
+const user_service = require('../service/user_service')
 
 
 // Generates hash using bCrypt
@@ -80,33 +75,23 @@ exports.isLoggedIn = (req, res, next) =>{
 //ROTAS
 
 exports.login = (req, res) => {
-    if (req.session.user) res.send('Success!');
+    if (req.session.user) res.send({success:true});
     else{
         let data = {}
         data.password = req.body.password;
         data.email = req.body.email;
 
-        request({
-            url: conf.server,
-            method: "POST",
-            json: true,   // <--Very important!!!
-            rejectUnauthorized: false,
-            requestCert: true,
-            agent: false,
-            body: {
-                data: globalf.encode_data(data)
-            }
-        }, (error, response, body) => {
-            if(!error){
-                if(body.data.success){
-                    req.session.user = body.data;
-                    res.send({success:true})
-                }
-                else 
-                    res.send({success:false, message: "Login and password invalid"}) 
-            }
-            else
-                res.send({success:false, message: "Internal route error"})
-        });
+        if(!data.password || ! data.email)
+            return res.send({success:false, message:'Give me email and password'})
+
+
+        user_service.login(data)
+            .then(result=>{
+                req.session.user = result.data;
+                res.send({success:true})
+            })
+            .catch(result=>{
+                res.send(result)
+            })
     }
 };

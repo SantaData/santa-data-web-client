@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
     env: "dev",
     dev:{
         server: ""
@@ -12,3 +12,5 @@ module.exports = {
         server: ""
     }
 }
+
+module.exports = config.env === 'dev'? config.dev : config.env === 'local'? config.local : config.prod;
