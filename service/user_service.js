@@ -1,5 +1,7 @@
 /*
 * Serviço do usuário
+*
+* (C) João Carlos Pandolfi Santana - 27/06/2018 
 */
 var service = require('./base_server')
 

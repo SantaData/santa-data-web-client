@@ -1,5 +1,7 @@
 /*
 * Arquivo base de serviços
+*
+* (C) João Carlos Pandolfi Santana - 27/06/2018 
 */
 
 //Libs

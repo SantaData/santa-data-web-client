@@ -1,15 +1,19 @@
+/*
+* Arquivo de configuração e credencial
+*/
+
 const config = {
     env: "dev",
     dev:{
-        server: ""
+        server: "https://31.220.54.251:8444"
     },
 
     prod: {
-        server: ""
+        server: "https://31.220.54.251:8443"
     },
 
     local:{
-        server: ""
+        server: "http://localhost:8444"
     }
 }
 
