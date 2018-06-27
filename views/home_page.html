@@ -1,0 +1,97 @@
+{% extends './default_page.html' %}
+
+{% block content %}
+
+<div class="Home" >
+
+  <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button class="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span className="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span></button>
+
+
+        <a class="navbar-brand" href="">
+          <img class="logo-panel img-responsive" src='https://i.imgur.com/x2KHDKm.png' alt='SantaData' title="" onClick=## name="intro"/>
+        </a>
+
+      </div>
+    </div>
+  </nav>
+
+  <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+    <div class="profile-sidebar">
+      <div class="profile-userpic">
+        <img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt=""/>
+      </div>
+      <div class="profile-usertitle">
+        <div class="profile-usertitle-name">João Carlos</div>
+        <div class="profile-usertitle-status"><span className="indicator label-success"></span>Online</div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="divider"></div>
+    <form role="search">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Pesquisar"/>
+      </div>
+    </form>
+
+    <ul class="nav menu">
+
+      <li class="menu-active">
+        <Link to="/inicio"><em class="lnr lnr-home fas fa-home">&nbsp;</em> Home </Link>
+      </li>
+
+      <li>
+        <Link to="/inicio"><em class="far fa-calendar">&nbsp;</em> Consultas </Link>
+      </li>
+
+      <li class="menu-active">
+        <Link to="/novo-paciente" ><em class="fas fa-plus">&nbsp;</em> Novo paciente </Link>
+      </li>
+
+      <li class="menu-active">
+        <Link to="/busca-paciente"><em class="fas fa-search">&nbsp;</em> Buscar paciente </Link>
+      </li>
+
+      <li class="menu-active">
+        <Link to="/pesquisa"><em class="fas fa-search">&nbsp;</em> Pesquisa </Link>
+      </li>
+
+      <li class="parent "><a data-toggle="collapse" href="#sub-item-1">
+        <em class="fa fa-navicon">&nbsp;</em> Usuário <span data-toggle="collapse" href="#sub-item-1" class="icon pull-left"><em class="fas fa-user"></em></span>
+        </a>
+        <ul class="children collapse" id="sub-item-1">
+          <li><a class="" href="">
+            <span class="fa fa-arrow-right">&nbsp;</span> Sub Item 1
+          </a></li>
+          <li><a class="" href="">
+            <span class="fa fa-arrow-right">&nbsp;</span> Sub Item 2
+          </a></li>
+          <li><a class="" href="">
+            <span class="fa fa-arrow-right">&nbsp;</span> Sub Item 3
+          </a></li>
+        </ul>
+      </li>
+      <li><a href="login"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+    </ul>
+
+  </div>
+
+  <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <section class="homeSection">
+      <Switch>
+        {this.props.child}
+      </Switch>
+    </section>
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
